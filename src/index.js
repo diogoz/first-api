@@ -26,15 +26,15 @@ const server = http.createServer((request, response) => {
     request.query = parsedUrl.query;
     request.params = { id };
 
-    response.end = (statusCode, body) => {
+    response.send = (statusCode, body) => {
       response.writeHead(statusCode, { "Content-Type": "application/json" });
-      response.end(JSON.stringify(body));
+      response.send(JSON.stringify(body));
     };
 
     route.handler(request, response);
   } else {
     response.writeHead(404, { "Content-Type": "text/html" });
-    response.end(`Cannot ${request.method} ${request.url}`);
+    response.send(`Cannot ${request.method} ${request.url}`);
   }
 });
 server.listen(3000, () =>
