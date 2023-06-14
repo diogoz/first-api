@@ -15,7 +15,6 @@ const server = http.createServer((request, response) => {
   if (splitEndpoint.length > 1) {
     pathname = `/${splitEndpoint[0]}/:id`;
     id = splitEndpoint[1];
-    console.log(pathname);
   }
 
   const route = routes.find(
@@ -27,8 +26,12 @@ const server = http.createServer((request, response) => {
     request.query = parsedUrl.query;
     request.params = { id };
 
+    response.end = (statusCode, body) => {
+      response.writeHead(statusCode, { "Content-Type": "application/json" });
+      response.end(JSON.stringify(body));
+    };
+
     route.handler(request, response);
-    console.log(route.handler);
   } else {
     response.writeHead(404, { "Content-Type": "text/html" });
     response.end(`Cannot ${request.method} ${request.url}`);
