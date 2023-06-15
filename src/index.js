@@ -28,13 +28,13 @@ const server = http.createServer((request, response) => {
 
     response.send = (statusCode, body) => {
       response.writeHead(statusCode, { "Content-Type": "application/json" });
-      response.send(JSON.stringify(body));
+      response.end(JSON.stringify(body));
     };
 
     route.handler(request, response);
   } else {
-    response.writeHead(404, { "Content-Type": "text/html" });
-    response.send(`Cannot ${request.method} ${request.url}`);
+    response.writeHead(404, { "content-type": "text/html" });
+    response.end(`Cannot: ${request.method} ${parsedUrl.pathname}`);
   }
 });
 server.listen(3000, () =>
