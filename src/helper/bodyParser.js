@@ -1,3 +1,4 @@
+// função que executa automaticamente quando for uma requisição do tipo POST/PUT
 function bodyParser(request, callback) {
   let body = "";
 
