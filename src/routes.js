@@ -1,3 +1,5 @@
+// criação dos endpoints seguindo a regra REST com /nomedorecurso
+
 const UserController = require("./controllers/UserController");
 module.exports = [
   {
